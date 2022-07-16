@@ -1,18 +1,16 @@
 #include QMK_KEYBOARD_H
 
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
 enum custom_layers {
     _QWERTY,
     _LOWER,
     _RAISE,
     _ADJUST,
+    _GAME,
 };
 
-#define LOWER  MO(_LOWER)
-#define RAISE  MO(_RAISE)
+#define LOWER MO(_LOWER)
+#define RAISE MO(_RAISE)
+#define GAME  TG(_GAME)
 
 #define _ESC MT(MOD_LGUI, KC_ESC) // escape on tap, gui on hold
 #define _SFT MT(MOD_LSFT, KC_ENT) // enter on tap, shift on hold
@@ -86,16 +84,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      | PgDw |BrtDw |      |      | Left | Down |  Up  |Right |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      | Sft  | Ctl  |      |      |      | Prev | Next |      |      |
+ * |      |      | Sft  | Ctl  |      |      |      | Prev | Next |      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |      |      |      |      |      | GAME |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] =  LAYOUT_ortho_4x12(
   KC_PSCR, XXXXXXX, XXXXXXX, KC_PGUP, KC_BRIU, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, KC_MPLY, RESET,
   XXXXXXX, XXXXXXX, XXXXXXX, KC_PGDN, KC_BRID, XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, KC_LSFT, KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  XXXXXXX, XXXXXXX, KC_LSFT, KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MNXT, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GAME
+),
+
+/* GAME
+ * ,-----------------------------------------------------------------------------------.
+ * |  1   |  2   |  3   |  4   |  5   |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * | TAB  |  q   |  w   |  e   |  r   |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * | SFT  |  a   |  s   |  d   |  f   |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * | CTL  |  z   |  x   |  ALT | SPC  |      |      |      |      |      |      | GAME |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_GAME] =  LAYOUT_ortho_4x12(
+  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  KC_LCTL, KC_Z,    KC_X,    KC_LALT, KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, GAME
 )
 };
 

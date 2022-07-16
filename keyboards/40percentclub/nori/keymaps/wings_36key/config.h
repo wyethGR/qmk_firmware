@@ -1,4 +1,4 @@
-/* Copyright 2018
+/* Copyright 2022 Wyeth Greenlaw Rollins (@wyethGR)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,4 +24,3 @@
 #define COMBO_COUNT 2             // number of combos used
 #define COMBO_TERM 40             // time out for combos in ms
 #define TAPPING_TERM 200          // time out for tap-hold in ms
-
